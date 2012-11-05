@@ -6,8 +6,9 @@ class OrderItemsController < ApplicationController
 
  def create
     @order_item = @order.order_items.find_or_initialize_by_product_id(params[:product_id])
+    @order_item.quantity += 1 
     unless @order_item.new_record?
-        @order_item.quantity += 1 
+        
     end
           
     if @order_item.save
@@ -38,6 +39,6 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item = OrderItem.find(params[:id])
     @order_item.destroy
-    redirect_to order_items_url, :notice => "Successfully destroyed order item."
+    redirect_to @order, :notice => "Successfully destroyed order item."
   end
 end

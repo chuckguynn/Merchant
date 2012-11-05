@@ -8,4 +8,8 @@ def to_s
     title
   end
 
+def price=(input)
+    input.delete!("$")
+    super
+  end
 end

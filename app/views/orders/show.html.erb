@@ -14,13 +14,13 @@
       <td><%= @order.order_items.count %></td>
     </tr>
     <tr>
-      <th>Items</th>
-      <th>Title</th>
-      <th>Quantity</th>
-      <th>Unit Price</th>
-      <th>Subtotal</th>
-      <th>Images</th>
-      <th>Remove</th>
+      <th></th>
+      <th>| Title |</th>
+      <th>| Quantity |</th>
+      <th>| Unit Price |</th>
+      <th>| Subtotal |</th>
+      <th>| Images |</th>
+      <th>| Remove |</th>
     </tr>
    <tr> 
     <% @order.order_items.each do |item| %>
@@ -30,7 +30,7 @@
     <td><%= print_price (item.product.price) %></td>
 	<td><%= print_price (item.subtotal) %></td>
 	<td><div class="span2"><%= image_tag "/images/products/#{item.product.image_url}" %></div></td>
-	<td><%= link_to "Remove", @order, :confirm => 'Are you sure?', :method => :delete %></td>
+	<td><%= button_to "Remove", item, :confirm => 'Are you sure?', :method => :delete %></td>
 </tr>
 
 	
@@ -40,9 +40,10 @@
 		<th>Order Total</th>
 		<td><%= print_price @order.total %></td>
 	</tr>
-	<p>
+	<p><%= button_to "Empty Cart", @order_items, :confirm => 'Are you sure?', :method => :delete %>
+  </p>
+  <p>
 		<%= link_to "Edit", edit_order_path(@order) %> |
-		<%= link_to "Empty Cart", @order, :confirm => 'Are you sure?', :method => :delete %> |
 		<%= link_to "Products Home", products_path %>
 	</p>
 	

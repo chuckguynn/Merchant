@@ -122,7 +122,6 @@ DEPENDENCIES
   jquery-rails
   mocha
   nifty-generators
-  omniauth
   omniauth-twitter
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
