@@ -1,18 +1,22 @@
 JSMerchant::Application.routes.draw do
   resources :addresses
 
-  resources :orders
+  resources :orders do
+    member do
+      put :purchase
+    end
+  end
 
   resources :order_items
 
   resources :products
-
-  root :to => "products#index"
+  resources :sessions
   
   match '/auth/:provider/callback', :to => 'sessions#create'
   match "/login" => redirect("/auth/twitter"), :as => :login
   match "/logout" => "sessions#destroy", :as => :logout  
 
+  root :to => "products#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

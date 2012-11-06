@@ -32,15 +32,28 @@
 	<td><div class="span2"><%= image_tag "/images/products/#{item.product.image_url}" %></div></td>
 	<td><%= button_to "Remove", item, :confirm => 'Are you sure?', :method => :delete %></td>
 </tr>
+ <% end %>
 
-	
-  <% end %>
+<% if current_user && !current_user.addresses.empty? %>
+
+<tr>
+    <th>Shipping To:</th>
+    <td>
+      <%= form_for @order, :url => purchase_order_path(@order), :method => :put do |f| %>
+        <%= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]} %>
+       <%= f.submit "Submit Order" %>
+       <% end %> 
+    </td>  
+    <td><%= link_to "New Address", new_address_path %></td>
+</tr>
+	<% end %>
+ 
   </table>
   <tr>
 		<th>Order Total</th>
 		<td><%= print_price @order.total %></td>
 	</tr>
-	<p><%= button_to "Empty Cart", @order_items, :confirm => 'Are you sure?', :method => :delete %>
+	<p><%= button_to "Empty Cart", @order, :confirm => 'Are you sure?', :method => :delete %>
   </p>
   <p>
 		<%= link_to "Edit", edit_order_path(@order) %> |

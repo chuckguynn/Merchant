@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_filter :load_order
+  
 
   def index
     @orders = Order.all
@@ -33,7 +33,19 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
+    if current_user 
+      @order.order_items.destroy_all
+    else
     @order.destroy
-    redirect_to products_path, :notice => "Successfully destroyed order."
+  end
+    redirect_to products_url, :notice => "Successfully Emptied Cart."
+  end
+
+  def purchase
+    @order = Order.find(params[:id])
+    @order.update_attributes(params[:address])
+    @order.save
+    session[:order_id] = nil
+    redirect_to sessions_url
   end
 end

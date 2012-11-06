@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :provider, :uid
   has_many :orders
+  has_many :addresses, :dependent => :destroy
 
   def self.find_or_create_by_auth(auth_data)
 
