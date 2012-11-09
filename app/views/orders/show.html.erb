@@ -15,12 +15,12 @@
     </tr>
     <tr>
       <th></th>
-      <th>| Title |</th>
-      <th>| Quantity |</th>
-      <th>| Unit Price |</th>
-      <th>| Subtotal |</th>
-      <th>| Images |</th>
-      <th>| Remove |</th>
+      <th> Title </th>
+      <th> Quantity </th>
+      <th> Unit Price </th>
+      <th> Subtotal </th>
+      <th> Images </th>
+      <th> Remove </th>
     </tr>
    <tr> 
     <% @order.order_items.each do |item| %>
@@ -41,7 +41,7 @@
     <td>
       <%= form_for @order, :url => purchase_order_path(@order), :method => :put do |f| %>
         <%= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]} %>
-       <%= f.submit "Submit Order" %>
+       <td><%= f.submit "Submit Order" %></td>
        <% end %> 
     </td>  
     <td><%= link_to "New Address", new_address_path %></td>
